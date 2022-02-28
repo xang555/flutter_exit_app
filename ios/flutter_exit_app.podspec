@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'flutter_exit_app'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'A flutter plugin to exit the app.'
   s.description      = <<-DESC
 A flutter plugin to exit the app.
