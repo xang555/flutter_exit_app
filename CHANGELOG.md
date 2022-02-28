@@ -1,3 +1,7 @@
-## 0.0.1
+# 1.0.0
 
-* TODO: Describe initial release.
+## CHANGELOGS
+
+* Implement native android exit app
+* Implement native ios exit app
+* Add License
