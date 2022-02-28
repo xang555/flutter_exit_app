@@ -2,6 +2,14 @@
 
 A flutter plugin to exit the app support Android and IOS
 
+## Install
+
+add plugin to `pubspec.yaml`
+
+```yaml
+flutter_exit_app: ^1.0.0
+```
+
 ## Usage
 
 ```dart
