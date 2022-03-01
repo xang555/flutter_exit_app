@@ -13,6 +13,7 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
+import android.os.Handler;
 
 /** FlutterExitAppPlugin */
 public class FlutterExitAppPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware {
@@ -22,6 +23,9 @@ public class FlutterExitAppPlugin implements FlutterPlugin, MethodCallHandler, A
   /// when the Flutter Engine is detached from the Activity
   private MethodChannel channel;
   private Activity activity;
+
+  // handler
+  final Handler handler = new Handler();
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -33,13 +37,25 @@ public class FlutterExitAppPlugin implements FlutterPlugin, MethodCallHandler, A
   public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
     if (call.method.equals("getPlatformVersion")) {
       result.success("Android " + android.os.Build.VERSION.RELEASE);
-    } else if (call.method.equals(ChannelName.exitapp)){
+    } else if (call.method.equals(ChannelName.exitapp)){  
       if(Build.VERSION.SDK_INT>=16 && Build.VERSION.SDK_INT<21){
         activity.finishAffinity();
+        handler.postDelayed(new Runnable() {
+          @Override
+          public void run() {
+            System.exit(0);
+          }
+        }, 2000);
         result.success("Done");
         return;
       } else if(Build.VERSION.SDK_INT>=21){
         activity.finishAndRemoveTask();
+        handler.postDelayed(new Runnable() {
+          @Override
+          public void run() {
+            System.exit(0);
+          }
+        }, 2000);
         result.success("Done");
         return;
       }
