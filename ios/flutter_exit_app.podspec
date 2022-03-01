@@ -4,10 +4,10 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'flutter_exit_app'
-  s.version          = '1.0.1'
-  s.summary          = 'A flutter plugin to exit the app.'
+  s.version          = '1.0.2'
+  s.summary          = "A flutter plugin provides the best way to exit the app doesn't call exit(0) in dart code."
   s.description      = <<-DESC
-A flutter plugin to exit the app.
+  A flutter plugin provides the best way to exit the app doesn't call exit(0) in dart code.
                        DESC
   s.homepage         = 'https://github.com/xang555/flutter_exit_app'
   s.license          = { :file => '../LICENSE' }
