@@ -26,7 +26,7 @@ public class SwiftFlutterExitAppPlugin: NSObject, FlutterPlugin {
  private func quit() {
         UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
         // Sleep for a while to let the app goes in background
-        sleep(2)
+        sleep(1)
         exit(0)
     }
 }

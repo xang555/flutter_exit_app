@@ -8,3 +8,7 @@
 
 * fix docs
 * android exit when 2000 msec
+
+# 1.0.5
+
+* fix kill app in background when 1 sec

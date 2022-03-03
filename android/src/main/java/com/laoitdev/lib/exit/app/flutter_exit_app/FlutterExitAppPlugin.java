@@ -45,7 +45,7 @@ public class FlutterExitAppPlugin implements FlutterPlugin, MethodCallHandler, A
           public void run() {
             System.exit(0);
           }
-        }, 2000);
+        }, 1000);
         result.success("Done");
         return;
       } else if(Build.VERSION.SDK_INT>=21){
@@ -55,7 +55,7 @@ public class FlutterExitAppPlugin implements FlutterPlugin, MethodCallHandler, A
           public void run() {
             System.exit(0);
           }
-        }, 2000);
+        }, 1000);
         result.success("Done");
         return;
       }
