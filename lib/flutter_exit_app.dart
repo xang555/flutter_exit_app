@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:flutter/services.dart';
 
 import 'src/channel_name.dart';
@@ -22,14 +21,9 @@ class FlutterExitApp {
   /// exit app
   ///
   /// return `true` if exit app success, otherwise `false`
-  /// [waitExitTimeSeconds] time waiting before exit this is for ios only
-  static Future<bool?> exitApp({int waitExitTimeSeconds = 1}) async {
+  static Future<bool?> exitApp() async {
     try {
       final String? res = await _channel.invokeMethod(ChannelName.exitApp);
-      if (Platform.isIOS) {
-        await Future.delayed(Duration(seconds: waitExitTimeSeconds));
-        exit(0);
-      }
       return res == "Done";
     } catch (e) {
       return false;

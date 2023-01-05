@@ -17,3 +17,7 @@
 
 * Fix kill ios process
 * Add time wait for exit
+
+# 1.1.1
+
+* breaking: remove `exit(0)` for ios
