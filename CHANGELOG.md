@@ -12,3 +12,8 @@
 # 1.0.5
 
 * fix kill app in background when 1 sec
+
+# 1.1.0
+
+* Fix kill ios process
+* Add time wait for exit
