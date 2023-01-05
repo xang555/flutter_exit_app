@@ -7,7 +7,7 @@ A flutter plugin provides the best way to exit the app doesn't call `exit(0)` in
 add plugin to your `pubspec.yaml`
 
 ```yaml
-flutter_exit_app: ^1.0.4
+flutter_exit_app: release
 ```
 
 ## Usage
@@ -24,4 +24,3 @@ import 'package:flutter_exit_app/flutter_exit_app.dart';
 // call this to exit app
 FlutterExitApp.exitApp();
 ```
-
