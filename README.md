@@ -24,3 +24,10 @@ import 'package:flutter_exit_app/flutter_exit_app.dart';
 // call this to exit app
 FlutterExitApp.exitApp();
 ```
+
+for IOS if you need to force exit app set `iosForceExit` to `true`
+
+```dart
+// force exit in ios
+FlutterExitApp.exitApp(iosForceExit: true);
+```
