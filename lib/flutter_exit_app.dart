@@ -21,9 +21,13 @@ class FlutterExitApp {
   /// exit app
   ///
   /// return `true` if exit app success, otherwise `false`
-  static Future<bool?> exitApp() async {
+  /// [iosForceExit] if `true` ios force exit  default `false`.  No affect in android
+  static Future<bool?> exitApp({bool iosForceExit = false}) async {
     try {
-      final String? res = await _channel.invokeMethod(ChannelName.exitApp);
+      final String? res = await _channel.invokeMethod(
+        ChannelName.exitApp,
+        {"killIosProcess": iosForceExit},
+      );
       return res == "Done";
     } catch (e) {
       return false;

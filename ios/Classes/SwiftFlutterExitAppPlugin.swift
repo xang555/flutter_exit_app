@@ -13,7 +13,8 @@ public class SwiftFlutterExitAppPlugin: NSObject, FlutterPlugin {
       if call.method == "getPlatformVersion" {
             result("iOS " + UIDevice.current.systemVersion)
       } else if call.method == "com.laoitdev.exit.app" {
-            quit()
+            let passData = parseArg(call)
+          quit(killIosProcess: passData.killIosProcess)
             result("Done")
       }else {
             result("NOT_IMPLEMENT")
@@ -23,7 +24,31 @@ public class SwiftFlutterExitAppPlugin: NSObject, FlutterPlugin {
     
     
  // Will quit the application with animation
- private func quit() {
+    private func quit(killIosProcess: Bool? = false) {
         UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+        
+        if killIosProcess == true {
+            sleep(1)
+            exit(0)
+        }
     }
+    
+ 
+// parse argument pass from flutter
+private func parseArg(_ call: FlutterMethodCall) -> ArgDataStruct {
+    let arguments = call.arguments as! [String : Any?]
+    
+    let killIosProcess = arguments["killIosProcess"] as? Bool
+    
+    return ArgDataStruct(
+        killIosProcess: killIosProcess
+    )
+}
+    
+// arg pass data struct
+struct ArgDataStruct {
+    var killIosProcess: Bool?
+}
+    
+    
 }

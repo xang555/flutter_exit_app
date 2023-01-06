@@ -21,3 +21,7 @@
 # 1.1.1
 
 * breaking: remove `exit(0)` for ios
+
+# 1.1.2
+
+* add `iosForceExit` parameter for `exitApp` method

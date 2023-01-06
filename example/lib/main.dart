@@ -60,10 +60,11 @@ class _MyAppState extends State<MyApp> {
             children: [
               Text('Running on: $_platformVersion\n'),
               TextButton(
-                  onPressed: () {
-                    FlutterExitApp.exitApp();
-                  },
-                  child: const Text('Exit')),
+                onPressed: () {
+                  FlutterExitApp.exitApp(iosForceExit: true);
+                },
+                child: const Text('Exit'),
+              ),
             ],
           ),
         ),
