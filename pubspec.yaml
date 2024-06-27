@@ -1,10 +1,10 @@
 name: flutter_exit_app
 description: A flutter plugin provides the best way to exit the app doesn't call exit(0) in dart code.
-version: 1.1.2
+version: 1.1.3
 homepage: https://github.com/xang555/flutter_exit_app
 
 environment:
-  sdk: ">=2.14.0 <3.0.0"
+  sdk: ">=2.14.0 <4.0.0"
   flutter: ">=2.5.0"
 
 dependencies:
@@ -14,7 +14,10 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  lints: ^1.0.1
+  lints: ^3.0.0
+  test:
+  mockito:
+  build_runner:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

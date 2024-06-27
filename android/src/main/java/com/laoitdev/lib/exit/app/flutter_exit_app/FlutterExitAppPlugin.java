@@ -1,8 +1,9 @@
 package com.laoitdev.lib.exit.app.flutter_exit_app;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 
 import androidx.annotation.NonNull;
 
@@ -13,19 +14,13 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import android.os.Handler;
 
 /** FlutterExitAppPlugin */
 public class FlutterExitAppPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware {
-  /// The MethodChannel that will the communication between Flutter and native Android
-  ///
-  /// This local reference serves to register the plugin with the Flutter Engine and unregister it
-  /// when the Flutter Engine is detached from the Activity
   private MethodChannel channel;
   private Activity activity;
 
-  // handler
-  final Handler handler = new Handler();
+  private final Handler handler = new Handler(Looper.getMainLooper());
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -35,33 +30,30 @@ public class FlutterExitAppPlugin implements FlutterPlugin, MethodCallHandler, A
 
   @Override
   public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
-    if (call.method.equals("getPlatformVersion")) {
-      result.success("Android " + android.os.Build.VERSION.RELEASE);
-    } else if (call.method.equals(ChannelName.exitapp)){  
-      if(Build.VERSION.SDK_INT>=16 && Build.VERSION.SDK_INT<21){
+    switch (call.method) {
+      case "getPlatformVersion":
+        result.success("Android " + Build.VERSION.RELEASE);
+        break;
+      case ChannelName.exitapp:
+        handleExitApp(result);
+        break;
+      default:
+        result.notImplemented();
+        break;
+    }
+  }
+
+  private void handleExitApp(@NonNull Result result) {
+    if (Build.VERSION.SDK_INT >= 16) {
+      if (Build.VERSION.SDK_INT < 21) {
         activity.finishAffinity();
-        handler.postDelayed(new Runnable() {
-          @Override
-          public void run() {
-            System.exit(0);
-          }
-        }, 1000);
-        result.success("Done");
-        return;
-      } else if(Build.VERSION.SDK_INT>=21){
+      } else {
         activity.finishAndRemoveTask();
-        handler.postDelayed(new Runnable() {
-          @Override
-          public void run() {
-            System.exit(0);
-          }
-        }, 1000);
-        result.success("Done");
-        return;
       }
-      result.error("NO_EXIT", "", "");
-    }else {
-      result.notImplemented();
+      handler.postDelayed(() -> Runtime.getRuntime().exit(0), 1000);
+      result.success("Done");
+    } else {
+      result.error("NO_EXIT", "Exiting app is not supported on this version", null);
     }
   }
 

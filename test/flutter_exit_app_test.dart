@@ -1,23 +1,62 @@
 import 'package:flutter/services.dart';
+import 'package:flutter_exit_app/src/channel_name.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:flutter_exit_app/flutter_exit_app.dart';
 
-void main() {
-  const MethodChannel channel = MethodChannel('flutter_exit_app');
+import 'flutter_exit_app_test.mocks.dart';
 
-  TestWidgetsFlutterBinding.ensureInitialized();
+@GenerateMocks([MethodChannel])
+void main() {
+  late MockMethodChannel mockChannel;
 
   setUp(() {
-    channel.setMockMethodCallHandler((MethodCall methodCall) async {
-      return '42';
+    mockChannel = MockMethodChannel();
+    FlutterExitApp.channel = mockChannel;
+  });
+
+  group('FlutterExitApp', () {
+    test('platformVersion returns version', () async {
+      when(mockChannel.invokeMethod<String>('getPlatformVersion'))
+          .thenAnswer((_) async => '1.0.0');
+
+      final version = await FlutterExitApp.platformVersion;
+
+      expect(version, '1.0.0');
     });
-  });
 
-  tearDown(() {
-    channel.setMockMethodCallHandler(null);
-  });
+    test('exitApp returns true on success', () async {
+      when(mockChannel.invokeMethod<String>(
+        ChannelName.exitApp,
+        {"killIosProcess": false},
+      )).thenAnswer((_) async => 'Done');
 
-  test('getPlatformVersion', () async {
-    expect(await FlutterExitApp.platformVersion, '42');
+      final result = await FlutterExitApp.exitApp();
+
+      expect(result, true);
+    });
+
+    test('exitApp returns false on failure', () async {
+      when(mockChannel.invokeMethod<String>(
+        ChannelName.exitApp,
+        {"killIosProcess": false},
+      )).thenThrow(PlatformException(code: 'ERROR'));
+
+      final result = await FlutterExitApp.exitApp();
+
+      expect(result, false);
+    });
+
+    test('exitApp handles iosForceExit parameter', () async {
+      when(mockChannel.invokeMethod<String>(
+        ChannelName.exitApp,
+        {"killIosProcess": true},
+      )).thenAnswer((_) async => 'Done');
+
+      final result = await FlutterExitApp.exitApp(iosForceExit: true);
+
+      expect(result, true);
+    });
   });
 }

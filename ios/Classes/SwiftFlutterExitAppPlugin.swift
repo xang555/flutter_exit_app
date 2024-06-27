@@ -23,15 +23,16 @@ public class SwiftFlutterExitAppPlugin: NSObject, FlutterPlugin {
   }
     
     
- // Will quit the application with animation
-    private func quit(killIosProcess: Bool? = false) {
-        UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+    // Will quit the application with animation
+  private func quit(killIosProcess: Bool? = false) {
+        UIApplication.shared.perform(#selector(URLSessionTask.suspend))
         
         if killIosProcess == true {
-            sleep(1)
-            exit(0)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                exit(0)
+            }
         }
-    }
+  }
     
  
 // parse argument pass from flutter
