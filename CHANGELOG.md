@@ -25,3 +25,11 @@
 # 1.1.2
 
 * add `iosForceExit` parameter for `exitApp` method
+
+# 1.1.3
+
+* Update version
+* Add Test case
+* Update example
+* Update native code
+* Fix an issue [#1](https://github.com/xang555/flutter_exit_app/issues/1)
