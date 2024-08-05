@@ -29,6 +29,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    if (project.android.hasProperty("namespace")) {
+        namespace("com.xang5555.flutter_exit_app")
+    }
+
     defaultConfig {
         minSdkVersion 16
     }
