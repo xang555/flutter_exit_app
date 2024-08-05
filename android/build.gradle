@@ -30,7 +30,7 @@ android {
     }
 
     if (project.android.hasProperty("namespace")) {
-        namespace("com.xang5555.flutter_exit_app")
+        namespace("com.laoitdev.lib.exit.app.flutter_exit_app")
     }
 
     defaultConfig {
