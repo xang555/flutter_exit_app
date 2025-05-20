@@ -1,6 +1,10 @@
 import Flutter
 import UIKit
 
+enum ChannelName {
+    static let exitApp = "com.laoitdev.exit.app"
+}
+
 public class SwiftFlutterExitAppPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "flutter_exit_app", binaryMessenger: registrar.messenger())
@@ -12,13 +16,13 @@ public class SwiftFlutterExitAppPlugin: NSObject, FlutterPlugin {
       
       if call.method == "getPlatformVersion" {
             result("iOS " + UIDevice.current.systemVersion)
-      } else if call.method == "com.laoitdev.exit.app" {
+      } else if call.method == ChannelName.exitApp {
             let passData = parseArg(call)
           quit(killIosProcess: passData.killIosProcess)
             result("Done")
-      }else {
-            result("NOT_IMPLEMENT")
-    }
+      } else {
+            result(FlutterMethodNotImplemented)
+      }
 
   }
     

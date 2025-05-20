@@ -34,7 +34,7 @@ public class FlutterExitAppPlugin implements FlutterPlugin, MethodCallHandler, A
       case "getPlatformVersion":
         result.success("Android " + Build.VERSION.RELEASE);
         break;
-      case ChannelName.exitapp:
+      case ChannelName.exitApp:
         handleExitApp(result);
         break;
       default:
