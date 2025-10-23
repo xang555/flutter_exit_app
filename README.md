@@ -103,47 +103,25 @@ class ExitButton extends StatelessWidget {
 
 ### iOS Guidelines
 
-Apple's Human Interface Guidelines discourage apps from programmatically exiting. The default behavior (`iosForceExit: false`) suspends the app, which is the recommended approach. Only use `iosForceExit: true` if you have a specific requirement.
+Apple's Human Interface Guidelines discourage apps from programmatically exiting. The plugin provides two modes:
+
+**Default mode** (`iosForceExit: false`):
+- Animates the app to background with a smooth fade-out effect
+- Suspends the app gracefully
+- App remains in memory until iOS decides to terminate it
+- **Recommended**: This is the Apple-approved approach
+
+**Force exit mode** (`iosForceExit: true`):
+- Animates the app with fade-out and scale-down effect
+- Forcibly terminates the process after animation
+- **Warning**: The app will appear to "crash" to users
+- May be rejected during App Store review
+- Only use if you have a specific requirement (e.g., enterprise apps)
 
 ### Android Behavior
 
-On Android, the plugin finishes the current activity and removes it from the recent tasks list, then exits the process after a 1-second delay to ensure clean shutdown.
+On Android, the plugin finishes the current activity and removes it from the recent tasks list, then exits the process after a 1-second delay to ensure clean shutdown. The app is completely removed from the task manager.
 
-## API Reference
-
-### `FlutterExitApp.exitApp({bool iosForceExit = false})`
-
-Exits the application using platform-specific methods.
-
-**Parameters:**
-- `iosForceExit` (optional): If `true`, forces the iOS app to terminate. Default is `false`.
-
-**Returns:** `Future<bool>` - `true` if exit was initiated successfully, `false` otherwise.
-
-### `FlutterExitApp.platformVersion`
-
-Gets the current platform version.
-
-**Returns:** `Future<String?>` - A string like "Android 13" or "iOS 16.0", or `null` if unavailable.
-
-## Migration Guide
-
-### From 1.x to 2.0
-
-Version 2.0 includes breaking changes:
-
-1. **Minimum requirements updated:**
-   - Flutter 3.10.0+ required
-   - Dart 3.0.0+ required
-   - Android API 21+ (was 16)
-   - iOS 12.0+ (was 9.0)
-
-2. **Return type changed:**
-   - `exitApp()` now returns `Future<bool>` instead of `Future<bool?>`
-
-3. **Android now uses Kotlin** (transparent to users)
-
-4. **Improved error handling** with better exception messages
 
 ## License
 
