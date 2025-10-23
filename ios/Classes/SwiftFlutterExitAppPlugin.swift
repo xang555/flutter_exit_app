@@ -46,60 +46,19 @@ public class SwiftFlutterExitAppPlugin: NSObject, FlutterPlugin {
 
     /// Performs the exit animation on the main thread
     private func performExitAnimation(forceKill: Bool) {
-        // Get all windows (works for both iOS 12 and iOS 13+)
-        let windows = getAppWindows()
-
-        // Ensure windows are visible and ready for animation
-        guard !windows.isEmpty else {
-            if forceKill {
-                exit(0)
-            }
-            return
-        }
-
-        // Get the main window for snapshot
-        guard let mainWindow = windows.first else {
-            if forceKill {
-                exit(0)
-            }
-            return
-        }
-
         if forceKill {
-            // Force kill: Scale down and fade like iOS app switcher
-            UIView.animate(
-                withDuration: 0.35,
-                delay: 0,
-                options: [.curveEaseInOut],
-                animations: {
-                    // Scale down to center with fade effect (like minimizing to home screen)
-                    mainWindow.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-                    mainWindow.alpha = 0
-                },
-                completion: { _ in
-                    exit(0)
-                }
-            )
+            // Force kill: Simple fade out and exit immediately
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                exit(0)
+            }
         } else {
-            // Graceful exit: Scale and fade like pressing home button
-            UIView.animate(
-                withDuration: 0.3,
-                delay: 0,
-                options: [.curveEaseInOut],
-                animations: {
-                    // Scale down slightly and fade (mimics iOS home button behavior)
-                    mainWindow.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-                    mainWindow.alpha = 0
-                },
-                completion: { _ in
-                    // Resign first responder to trigger proper lifecycle events
-                    UIApplication.shared.resignFirstResponder()
+            // Graceful exit: Suspend the app
+            // Resign first responder to trigger proper lifecycle events
+            UIApplication.shared.resignFirstResponder()
 
-                    // Suspend the app (moves to background)
-                    // Note: This uses a private API and may be rejected by App Store
-                    UIApplication.shared.perform(#selector(URLSessionTask.suspend))
-                }
-            )
+            // Suspend the app (moves to background)
+            // Note: This uses a private API and may be rejected by App Store
+            UIApplication.shared.perform(#selector(URLSessionTask.suspend))
         }
     }
 
