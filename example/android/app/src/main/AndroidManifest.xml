@@ -1,5 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.laoitdev.lib.exit.app.flutter_exit_app_example">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
    <application
         android:label="flutter_exit_app_example"
         android:name="${applicationName}"

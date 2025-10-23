@@ -28,11 +28,16 @@ if (flutterVersionName == null) {
 }
 
 android {
+    namespace 'com.laoitdev.lib.exit.app.flutter_exit_app_example'
     compileSdkVersion flutter.compileSdkVersion
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 
     defaultConfig {

@@ -2,13 +2,15 @@ group 'com.laoitdev.lib.exit.app.flutter_exit_app'
 version '1.0'
 
 buildscript {
+    ext.kotlin_version = '1.9.24'
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0'
+        classpath 'com.android.tools.build:gradle:8.1.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -20,20 +22,31 @@ rootProject.allprojects {
 }
 
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 31
+    compileSdk 34
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    if (project.android.hasProperty("namespace")) {
-        namespace("com.laoitdev.lib.exit.app.flutter_exit_app")
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 
+    namespace 'com.laoitdev.lib.exit.app.flutter_exit_app'
+
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21
     }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
