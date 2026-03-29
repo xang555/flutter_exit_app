@@ -23,7 +23,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  flutter_exit_app: ^2.0.0
+  flutter_exit_app: ^2.1.1
 ```
 
 Then run:
