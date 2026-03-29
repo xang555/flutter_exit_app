@@ -1,6 +1,6 @@
 PODS:
   - Flutter (1.0.0)
-  - flutter_exit_app (1.1.4):
+  - flutter_exit_app (2.0.0):
     - Flutter
 
 DEPENDENCIES:
@@ -14,9 +14,9 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_exit_app/ios"
 
 SPEC CHECKSUMS:
-  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  flutter_exit_app: ac8e10b832b9ad562d11fa06c4010be4ea241465
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  flutter_exit_app: 4222e53b3c922696f214f6ebdd02cca01c575e3c
 
-PODFILE CHECKSUM: c4c93c5f6502fe2754f48404d3594bf779584011
+PODFILE CHECKSUM: cc1f88378b4bfcf93a6ce00d2c587857c6008d3b
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2
