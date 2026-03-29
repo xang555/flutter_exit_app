@@ -1,3 +1,31 @@
+# 2.1.0
+
+**Swift Package Manager support and dependency upgrades**
+
+## Breaking Changes
+* **BREAKING**: Minimum iOS version increased from 12.0 to 13.0
+
+## iOS Changes
+* **SPM Support**: Added Swift Package Manager support while maintaining CocoaPods compatibility
+* Restructured iOS sources to `ios/flutter_exit_app/Sources/flutter_exit_app/`
+* Updated podspec to support dual CocoaPods and SPM integration
+
+## Android Upgrades
+* Updated Kotlin from 1.9.24 to 2.0.21
+* Updated Android Gradle Plugin from 8.1.0 to 8.7.3
+* Updated Gradle from 8.4 to 8.9
+* Updated Java compatibility from 1.8 to 17
+* Updated kotlin-stdlib-jdk8 to kotlin-stdlib
+
+## Example App Updates
+* Updated for new Flutter iOS architecture with `FlutterImplicitEngineDelegate`
+* Added `UIApplicationSceneManifest` configuration for modern iOS scene management
+* Updated minimum deployment target to iOS 13.0
+
+## Notes
+* Projects using CocoaPods will continue to work without changes
+* New projects can opt to use Swift Package Manager
+
 # 2.0.0
 
 **Major modernization update with breaking changes**
