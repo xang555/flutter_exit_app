@@ -1,3 +1,7 @@
+# 2.1.1
+
+* Updated README version reference
+
 # 2.1.0
 
 **Swift Package Manager support and dependency upgrades**
