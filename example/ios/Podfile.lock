@@ -1,6 +1,6 @@
 PODS:
   - Flutter (1.0.0)
-  - flutter_exit_app (2.0.0):
+  - flutter_exit_app (2.1.0):
     - Flutter
 
 DEPENDENCIES:
@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
-  flutter_exit_app: 4222e53b3c922696f214f6ebdd02cca01c575e3c
+  flutter_exit_app: 03f0a8c2a63152d33ba34b29a03fcbefd6af9988
 
 PODFILE CHECKSUM: cc1f88378b4bfcf93a6ce00d2c587857c6008d3b
 

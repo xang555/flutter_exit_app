@@ -1,14 +1,14 @@
 import Flutter
 import UIKit
 
-public class SwiftFlutterExitAppPlugin: NSObject, FlutterPlugin {
-    public static func register(with registrar: FlutterPluginRegistrar) {
+@objc public class FlutterExitAppPlugin: NSObject, FlutterPlugin {
+    @objc public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "flutter_exit_app", binaryMessenger: registrar.messenger())
-        let instance = SwiftFlutterExitAppPlugin()
+        let instance = FlutterExitAppPlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
     }
 
-    public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+    @objc public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch call.method {
         case "getPlatformVersion":
             result("iOS " + UIDevice.current.systemVersion)

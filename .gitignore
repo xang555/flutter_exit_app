@@ -31,3 +31,4 @@ build/
 # AI related
 CLAUDE.md
 .claude/
+.omc/
