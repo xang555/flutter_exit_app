@@ -1,3 +1,7 @@
+# 2.1.2
+
+* Fixed Swift Package Manager compatibility by migrating the iOS plugin implementation to 100% Swift (removing the mixed language Swift/Objective-C target structure which is not supported by SPM).
+
 # 2.1.1
 
 * Updated README version reference
